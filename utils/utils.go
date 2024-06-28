@@ -6,8 +6,14 @@ import (
 )
 
 func Query_parser(query string) ([]string, string, []string) {
+	// cut off the semicolon from the end
+	_query, found := strings.CutSuffix(query, ";")
+	if !found {
+		log.Fatal("SQL query must end with semi-colon")
+	}
+
 	// split the query string
-	query_array := strings.Split(query, " ")
+	query_array := strings.Split(_query, " ")
 
 	// init flags
 	select_flag := false
